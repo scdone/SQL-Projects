@@ -1,5 +1,13 @@
 # SQL Queries I Have Experience Writing:
 
+- Creating tables
+- Deleting tables or information within tables
+- Updating tables
+- Searching for substrings using LIKE
+- Using aggregate functions such as SUM, COUNT, MIN, MAX, and AVG
+- Grouping and ordering query information
+- Using CASE to create new columns/labels/categories based on conditions
+
 
 ## Creating Tables
 
