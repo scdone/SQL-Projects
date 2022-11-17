@@ -50,7 +50,6 @@ Used to update existing tables to add new information.
 ### Example Syntax
 ```
     INSERT INTO customers (
-        customer_id,
         first_name,
         last_name,
         email,
@@ -58,7 +57,6 @@ Used to update existing tables to add new information.
         gender,
         address
     ) VALUES (
-        5,
         'Jessica',
         'Smith',
         'jsmith22@gmail.com',
@@ -141,7 +139,22 @@ WHERE title LIKE '%Manager%';
 
 Aggregate functions are used frequently to get numbers from the tables - that could be adding things with SUM, counting rows with COUNT, or finding summary statistics using MIN, MAX, or AVG. 
 
-### Example Syntax  
+### Example Syntax 
+  
+###### SUM  
+
+This example shows the customers who have spent the most. 
+
+```
+    SELECT 
+        CONCAT(c.first_name, ' ', c.last_name) customer_name, 
+        SUM(i.total) total
+    FROM customer c
+    JOIN invoice i 
+    ON c.customer_id = i.customer_id
+    GROUP BY customer_name
+    ORDER BY total DESC;
+```  
 
 ###### COUNT  
 
@@ -165,12 +178,38 @@ This example returns the average amount spent by each customer on the invoices i
     GROUP BY customer_name
     ORDER BY average_total DESC;
 ```
+  
+###### MIN 
 
+This example returns the least amount spent by each customer according to the invoices in the database. 
 
+```
+    SELECT 
+        CONCAT(c.first_name, ' ', c.last_name) customer_name, 
+        MIN(i.total) min_total
+    FROM customer c
+    JOIN invoice i 
+    ON c.customer_id = i.customer_id
+    GROUP BY customer_name
+    ORDER BY min_total DESC;
+```  
 
 ## Using CASE
 
-### Use Case
+### Use Case  
+Case is used to create additional columns based on specified conditions in the data. It can be used to label data or for 'binning' - to create categories for numerical data. 
 
-### Example Syntax
+### Example Syntax  
+
+In the example below, a new column will appear in the query output which categorizes the invoices into 'small,' 'medium,' 'large,' and 'x-large' order sizes based on the total.  
+  
+```
+    SELECT *, 
+    CASE WHEN total > 10 THEN 'x-large'
+         WHEN total > 6 THEN 'large'
+         WHEN total > 3 THEN 'medium'
+         ELSE 'small' END AS order_size
+    FROM invoice;
+```
+
 
