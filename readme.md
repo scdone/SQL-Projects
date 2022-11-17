@@ -38,7 +38,7 @@ Used to delete entire tables or deleting specific information from tables in the
 
 ```
     DELETE FROM customers
-    WHERE customer_id = 10
+    WHERE customer_id = 10;
 ```
 
 
@@ -76,20 +76,35 @@ Used to get information from more than one table. Joins are usually performed on
 
 ### Example Syntax
 
+In this example, the JOIN operator is used to return customer names and total items purchased from the customer table and invoice table where the customer id matches the customer id on the invoice.
+
 ```
-    SELECT c.first_name || ' ' || c.last_name AS name,
-            i.total, 
+    SELECT 
+        c.first_name || ' ' || c.last_name AS name,
+        i.total, 
     FROM customers c
     JOIN invoices i 
     ON c.customer_id = i.customer_id;
 ```
 
+In the example below, a **self JOIN** is used to extract information in different ways from the same table. The query below returns the employee name along with the manager's name who they report to by using an INNER JOIN where the employee_id is equal to the 'reports_to' employee_id number.
+
+```
+    SELECT 
+        CONCAT(e.first_name, ' ', e.last_name) employee,
+        CONCAT(m.first_name, ' ', m.last_name) manager
+    FROM 
+        employee e
+    INNER JOIN employee m ON m.employee_id = e.reports_to
+    ORDER BY manager;
+```
+
 ## Grouping and Ordering (GROUP BY, ORDER BY)
 
 ### Use Case
-Group by is used to group output under certain conditions such as items purchased by customer. 
+GROUP BY is used to group output under certain conditions such as items purchased by customer. 
 
-Order by is used to order the output either in ascending numerical order or alphabetical order. Using 'DESC' will make change this to descending or reverse alphabetical order.
+ORDER BY is used to order the output either in ascending numerical order or alphabetical order. Using 'DESC' will make change this to descending or reverse alphabetical order.
  
 
 ### Example Syntax
@@ -124,7 +139,33 @@ WHERE title LIKE '%Manager%';
 
 ### Use Case
 
-### Example Syntax
+Aggregate functions are used frequently to get numbers from the tables - that could be adding things with SUM, counting rows with COUNT, or finding summary statistics using MIN, MAX, or AVG. 
+
+### Example Syntax  
+
+###### COUNT  
+
+This example returns the number of unique customers in the table by counting the distinct customer_id values. 
+
+```
+SELECT DISTINCT COUNT(customer_id)
+FROM customer;
+```
+###### AVG  
+ 
+This example returns the average amount spent by each customer on the invoices in the database.  
+
+```
+    SELECT 
+        CONCAT(c.first_name, ' ', c.last_name) customer_name, 
+        AVG(i.total) average_total
+    FROM customer c
+    JOIN invoice i 
+    ON c.customer_id = i.customer_id
+    GROUP BY customer_name
+    ORDER BY average_total DESC;
+```
+
 
 
 ## Using CASE
