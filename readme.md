@@ -1,12 +1,18 @@
 # SQL Queries I Have Experience Writing:
 
+- All basic commands such as SELECT, FROM, WHERE, GROUP BY, ORDER BY, HAVING
+- Simple and complex joins such as JOIN, LEFT/RIGHT JOIN, INNER/OUTER JOIN
+- Aggregate functions such as SUM(), COUNT(), MIN(), MAX(), AVG()
+- Using CTE's such as WITH ___ AS (), () AS, () AS .... SELECT ___; etc.
+- Using window functions such as OVER(PARTITION BY ___ ORDER BY ___)
+- Date functions such as DATEADD(), TO_DATE(), DATE_PART()
+- Conditional functions such as IFF(), CASE/WHEN/THEN, COUNT_IF()
+- Formatting functions such as PIVOT(), UNPIVOT(), REGEX_REPLACE()
+- Null handling functions such as COALESCE(),IFNULL()
+- Using subqueries
 - Creating tables
 - Deleting tables or information within tables
 - Updating tables
-- Searching for substrings using LIKE
-- Using aggregate functions such as SUM, COUNT, MIN, MAX, and AVG
-- Grouping and ordering query information
-- Using CASE to create new columns/labels/categories based on conditions
 
 
 ## Creating Tables
